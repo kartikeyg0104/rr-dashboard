@@ -1,0 +1,12 @@
+node_modules/
+.DS_Store
+qa/
+*.tar.gz
+*.zip
+.env*
+!.env.example
+/.openai/
+/export_data.py
+/data-verification.json
+/DESIGN.md
+
