@@ -30,6 +30,9 @@ The tests reproduce the beta lower-tail index for every supported record, lock t
 - Auction-inspired selection room with holographic player cards, 3D pointer tilt, evidence on the reverse, stadium beams and an animated ranking ticker.
 - A browser-local review board with add/remove, clear, player evidence and comparison actions. This never changes official selections or represents auction availability.
 - A persistent animation pause control, with automatic respect for the device's reduced-motion setting.
+- Immersive Cinema view, split-door entrance, stadium backdrop, broadcast name reveals, lens flares and a lit auction podium.
+- An optional 7.5-second showreel, with play/pause, and a scrollable player vault for direct card selection. Cinema mode supports left/right arrows and Escape; no sound or automatic showreel playback.
+- Real, locally hosted player portraits for the final twenty and Kohli's comparison profile. Photos appear on player cards, the vault, the review board, rankings, comparisons and player details; official source profiles are listed under Image credits.
 - Official top tens and searchable full supported cohort: 117 batters and 132 bowlers.
 - Player profiles with exposure, ordinary-state baseline, uncertainty and alternate scenario ranks.
 - Same-role player comparisons, pressure-mask calculator and live index sandbox.
@@ -66,6 +69,11 @@ dist/                     Deploy this directory
   lib.js                  Pure analysis helpers
   auction.js              Selection room and browser-local review board
   auction.css             Player cards, lighting and motion
+  cinema.js               Cinematic presentation helpers
+  cinema.css              Stadium, opening and immersive view
+  photos.js               Portrait rendering and image credits
+  photo-data.js           Player ID to verified photograph mapping
+  photos.css              Cutout composition and portrait layouts
   assets/                 Derived aggregates, report, font and icon
 tests/                    Reproducible analysis checks
 scripts/verify.mjs         Static output checks
@@ -73,3 +81,5 @@ scripts/verify.mjs         Static output checks
 ```
 
 Local source export utilities, source verification notes, QA output and optional private Sites metadata are ignored by Git and are not required to host the app. Manrope and Bebas Neue are distributed under the SIL Open Font License; their licenses are included in dist/assets/.
+
+Player photographs remain copyright their respective owners. Credits and original source URLs are recorded in dist/assets/image-credits.json; uniforms in source photos do not imply current team membership, auction availability or Rajasthan Royals affiliation. No synthetic player likenesses are used.

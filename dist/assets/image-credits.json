@@ -1,0 +1,173 @@
+{
+  "notice": "Player photographs copyright their respective owners. Image sources are credited by player. Uniforms reflect the source photograph, not current team or auction status.",
+  "images": [
+    {
+      "id": "2984",
+      "name": "Sikandar Raza",
+      "src": "./assets/players/sikandar-raza.png",
+      "profile": "https://www.punjabkingsipl.in/players/25422-sikandar-raza-profile",
+      "sourceUrl": "https://www.punjabkingsipl.in/static-assets/images/players/25422.png",
+      "owner": "Punjab Kings"
+    },
+    {
+      "id": "3647",
+      "name": "Shreyas Iyer",
+      "src": "./assets/players/shreyas-iyer.png",
+      "profile": "https://www.punjabkingsipl.in/players/63961-shreyas-iyer-profile",
+      "sourceUrl": "https://www.punjabkingsipl.in/static-assets/images/players/63961.png",
+      "owner": "Punjab Kings"
+    },
+    {
+      "id": "6059",
+      "name": "Ruturaj Gaikwad",
+      "src": "./assets/players/ruturaj-gaikwad.png",
+      "profile": "https://uatapp.chennaisuperkings.com/matchcentre/teamPage",
+      "sourceUrl": "https://documents.iplt20.com/ipl/IPLHeadshot2025/102.png",
+      "owner": "IPL / BCCI"
+    },
+    {
+      "id": "4853",
+      "name": "Glenn Phillips",
+      "src": "./assets/players/glenn-phillips.png",
+      "profile": "https://www.gujarattitansipl.com/players",
+      "sourceUrl": "https://www.gujarattitansipl.com/static-assets/images/players/65295.png",
+      "owner": "Gujarat Titans"
+    },
+    {
+      "id": "37052",
+      "name": "Naman Dhir",
+      "src": "./assets/players/naman-dhir.png",
+      "profile": "https://www.mumbaiindians.com/players/100353-naman-dhir-profile",
+      "sourceUrl": "https://www.mumbaiindians.com/static-assets/images/players/large/100353.png",
+      "owner": "Mumbai Indians"
+    },
+    {
+      "id": "1101",
+      "name": "George Dockrell",
+      "src": "./assets/players/george-dockrell.webp",
+      "profile": "https://www.icc-cricket.com/rankings/9694/george-dockrell",
+      "sourceUrl": "https://images.icc-cricket.com/image/upload/t_player-headshot-portrait-lg-webp/prd/assets/players/generic/colored/9694.png",
+      "owner": "International Cricket Council"
+    },
+    {
+      "id": "6396",
+      "name": "Tim David",
+      "src": "./assets/players/tim-david.webp",
+      "profile": "https://www.icc-cricket.com/rankings/67402/tim-david",
+      "sourceUrl": "https://images.icc-cricket.com/image/upload/t_player-headshot-portrait-lg-webp/prd/assets/players/generic/colored/67402.png",
+      "owner": "International Cricket Council"
+    },
+    {
+      "id": "4926",
+      "name": "Shadab Khan",
+      "src": "./assets/players/shadab-khan.webp",
+      "profile": "https://www.icc-cricket.com/rankings/65739/shadab-khan",
+      "sourceUrl": "https://images.icc-cricket.com/image/upload/t_player-headshot-portrait-lg-webp/prd/assets/players/generic/colored/65739.png",
+      "owner": "International Cricket Council"
+    },
+    {
+      "id": "4986",
+      "name": "Rovman Powell",
+      "src": "./assets/players/rovman-powell.webp",
+      "profile": "https://www.icc-cricket.com/rankings/65291/rovman-powell",
+      "sourceUrl": "https://images.icc-cricket.com/image/upload/t_player-headshot-portrait-lg-webp/prd/assets/players/generic/colored/65291.png",
+      "owner": "International Cricket Council"
+    },
+    {
+      "id": "7897",
+      "name": "Tilak Varma",
+      "src": "./assets/players/tilak-varma.webp",
+      "profile": "https://www.icc-cricket.com/rankings/70761/tilak-varma",
+      "sourceUrl": "https://images.icc-cricket.com/image/upload/t_player-headshot-portrait-lg-webp/prd/assets/players/generic/colored/70761.png",
+      "owner": "International Cricket Council"
+    },
+    {
+      "id": "7327",
+      "name": "Rasikh Salam",
+      "src": "./assets/players/rasikh-salam.png",
+      "profile": "https://www.iplt20.com/players/affe5197-6dc4-45b3-8d29-7e8bd069e58a/rasikh-dar",
+      "sourceUrl": "https://www.iplt20.com/api/team-assets?pathname=player%2F8903%2F2138%2F68859.png&brand=ipl",
+      "owner": "IPL / BCCI"
+    },
+    {
+      "id": "2933",
+      "name": "Jasprit Bumrah",
+      "src": "./assets/players/jasprit-bumrah.webp",
+      "profile": "https://www.icc-cricket.com/rankings/63755/jasprit-bumrah",
+      "sourceUrl": "https://images.icc-cricket.com/image/upload/t_player-headshot-portrait-lg-webp/prd/assets/players/generic/colored/63755.png",
+      "owner": "International Cricket Council"
+    },
+    {
+      "id": "3628",
+      "name": "Kagiso Rabada",
+      "src": "./assets/players/kagiso-rabada.webp",
+      "profile": "https://www.icc-cricket.com/rankings/63611/kagiso-rabada",
+      "sourceUrl": "https://images.icc-cricket.com/image/upload/t_player-headshot-portrait-lg-webp/prd/assets/players/generic/colored/63611.png",
+      "owner": "International Cricket Council"
+    },
+    {
+      "id": "781",
+      "name": "Sunil Narine",
+      "src": "./assets/players/sunil-narine.png",
+      "profile": "https://www.kkr.in/players",
+      "sourceUrl": "https://www.kkr.in/static-assets/images/players/11229.png",
+      "owner": "Kolkata Knight Riders"
+    },
+    {
+      "id": "7364",
+      "name": "Haris Rauf",
+      "src": "./assets/players/haris-rauf.webp",
+      "profile": "https://www.icc-cricket.com/rankings/70326/haris-rauf",
+      "sourceUrl": "https://images.icc-cricket.com/image/upload/t_player-headshot-portrait-lg-webp/prd/assets/players/generic/colored/70326.png",
+      "owner": "International Cricket Council"
+    },
+    {
+      "id": "2633",
+      "name": "Jason Holder",
+      "src": "./assets/players/jason-holder.webp",
+      "profile": "https://www.icc-cricket.com/rankings/10232/jason-holder",
+      "sourceUrl": "https://images.icc-cricket.com/image/upload/t_player-headshot-portrait-lg-webp/prd/assets/players/generic/colored/10232.png",
+      "owner": "International Cricket Council"
+    },
+    {
+      "id": "2382",
+      "name": "Jamie Overton",
+      "src": "./assets/players/jamie-overton.webp",
+      "profile": "https://www.icc-cricket.com/rankings/58482/jamie-overton",
+      "sourceUrl": "https://images.icc-cricket.com/image/upload/t_player-headshot-portrait-lg-webp/prd/assets/players/generic/colored/58482.png",
+      "owner": "International Cricket Council"
+    },
+    {
+      "id": "39657",
+      "name": "Eshan Malinga",
+      "src": "./assets/players/eshan-malinga.png",
+      "profile": "https://www.paarlroyals.com/squad/94784-eshan-malinga",
+      "sourceUrl": "https://www.paarlroyals.com/static-assets/images/players/94784.png",
+      "owner": "Paarl Royals"
+    },
+    {
+      "id": "2876",
+      "name": "Axar Patel",
+      "src": "./assets/players/axar-patel.webp",
+      "profile": "https://www.icc-cricket.com/rankings/62576/axar-patel",
+      "sourceUrl": "https://images.icc-cricket.com/image/upload/t_player-headshot-portrait-lg-webp/prd/assets/players/generic/colored/62576.png",
+      "owner": "International Cricket Council"
+    },
+    {
+      "id": "4373",
+      "name": "Mustafizur Rahman",
+      "src": "./assets/players/mustafizur-rahman.webp",
+      "profile": "https://www.icc-cricket.com/rankings/63881/mustafizur-rahman",
+      "sourceUrl": "https://images.icc-cricket.com/image/upload/t_player-headshot-portrait-lg-webp/prd/assets/players/generic/colored/63881.png",
+      "owner": "International Cricket Council"
+    },
+    {
+      "id": "47",
+      "name": "Virat Kohli",
+      "src": "./assets/players/virat-kohli.webp",
+      "profile": "https://www.icc-cricket.com/rankings/3993/virat-kohli",
+      "sourceUrl": "https://images.icc-cricket.com/image/upload/t_player-headshot-portrait-lg-webp/prd/assets/players/generic/colored/3993.png",
+      "owner": "International Cricket Council"
+    }
+  ]
+}

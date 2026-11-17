@@ -1,5 +1,6 @@
 import {fmt,esc,initials,pressureState,selectPlayers,reliabilityIndex,csvFor} from './lib.js';
 import {createSelectionRoom} from './auction.js';
+import {playerAvatar,portrait,imageCredits} from './photos.js';
 
 const main=document.querySelector('main'), dialog=document.querySelector('#player-dialog');
 const state={role:'bat',query:'',scope:'top',sort:'rank',page:1,compareRole:'bat',compareA:'2984',compareB:'3647',labRole:'bat',probability:45,balls:48,wins:18,appearances:28};
@@ -10,7 +11,7 @@ const player=(id,role)=>data.players.find(p=>p.id===String(id)&&p.role===role);
 const roleName=role=>role==='bat'?'Batters':'Bowlers';
 const roleClass=role=>role==='bowl'?'bowl':'bat';
 const idKey=p=>`${p.role}:${p.id}`;
-const avatar=p=>`<span class="player-avatar" aria-hidden="true">${esc(initials(p.shortName))}</span>`;
+const avatar=playerAvatar;
 const head=(label,title,sub)=>`<div class="page-heading"><div><div class="eyebrow">${label}</div><h1>${title}</h1><p class="subtitle">${sub}</p></div><span class="date-pill">2022–2026 · Supplied data pack</span></div>`;
 const segment=(id,current)=>`<div class="segmented" id="${id}" aria-label="Player role"><button data-role="bat" class="${current==='bat'?'active pink':''}" aria-pressed="${current==='bat'}">Batters</button><button data-role="bowl" class="${current==='bowl'?'active blue':''}" aria-pressed="${current==='bowl'}">Bowlers</button></div>`;
 const kohliNote=`Virat Kohli is eligible and ranked #99 of 117 batters in this method. Two notable innings—82* vs Pakistan in 2022 and 76 in the 2024 World Cup final—are absent from the supplied match inventory. This is a dataset-specific result, not a verdict on his career.`;
@@ -45,6 +46,7 @@ function openPlayer(key){
   returnFocus=document.activeElement;
   const beta=`${fmt(p.betaLow*100)}–${fmt(p.betaHigh*100)}%`;
   document.querySelector('#dialog-content').innerHTML=`<div class="player-dialog-body ${roleClass(role)}"><div class="dialog-top"><div><div class="dialog-role">${roleName(role)} · ${p.rank<=10?'Final selection':'Supported cohort'}</div><h2 id="dialog-title">${esc(p.shortName)}</h2><p>Official rank #${p.rank} / ${role==='bat'?'117':'132'} · ${esc(p.name)}</p></div><button class="icon-button" id="close-dialog" aria-label="Close player details">×</button></div><div class="dialog-score"><strong>${fmt(p.score,2)}</strong><div><p>Conservative reliability index</p><small>10th posterior percentile × 100. Index points are not a predicted success percentage.</small></div></div><div class="mini-grid">${[[`${p.wins} / ${p.n}`,'Positive pressure appearances'],[`${signed(p.lift)} pp`,'Smoothed own-usual lift'],[signed(p.utility),'Net pressure utility / 100']].map(([v,t])=>`<div class="mini-stat"><strong>${v}</strong><small>${t}</small></div>`).join('')}</div><dl class="definition-list"><div><dt>Pressure versus ordinary-state evidence</dt><dd>Pressure: ${p.wins}/${p.n} positives; smoothed rate ${fmt(p.pRate*100)}%. Ordinary states: ${p.ordinaryWins}/${p.ordinaryN}; smoothed rate ${fmt(p.ordinaryRate*100)}%. Conditional 80% beta interval for the pressure rate: ${beta}.</dd></div><div><dt>Exposure & recency</dt><dd>${fmt(p.exposure,0)} pressure-exposure units; ${fmt(p.overallExposure,0)} overall. IPL pressure exposure: ${fmt(p.iplExposure,0)}. Since 2025: ${fmt(p.recentExposure,0)} pressure-exposure units in ${p.recentMatches} fixtures.</dd></div><div><dt>Conditional fixture-bootstrap stability</dt><dd>Top-ten frequency: ${fmt(p.top10Frequency*100)}% of resamples. 80% rank interval: ${fmt(p.rankLow,1)}–${fmt(p.rankHigh,1)}. These are conditional on the fitted models, fixed event labels and fixed cohort.</dd></div></dl><h3 class="panel-title margin-top">Alternate definitions & samples</h3><div class="dialog-scenarios">${p.scenarios.map(s=>`<div>${esc(s.label)}<small>${s.rank!==null?`Alternate rank #${s.rank}`:esc(s.status)}</small></div>`).join('')}</div>${p.id==='47'&&role==='bat'?`<div class="notice"><strong>Read this result in context.</strong> ${kohliNote}</div><div class="coverage-list">${sources()}</div>`:''}<p class="dialog-source">An alternate rank is a separate analysis, not the official ordering. Pressure masks exclude the first ten overs. Dataset coverage, role, support and model choices affect every interpretation.</p><div class="comparison-controls"><button class="button button-dark compact" data-compare-player="${idKey(p)}">Compare this player ↗</button><button class="button button-outline compact" id="dialog-done">Done</button></div></div>`;
+  document.querySelector('.dialog-top').insertAdjacentHTML('afterbegin',portrait(p,{className:'dialog-portrait',loading:'eager'}));
   dialog.showModal();document.querySelector('#close-dialog').focus();
 }
 function toast(text){const t=document.querySelector('#toast');t.textContent=text;t.classList.add('visible');setTimeout(()=>t.classList.remove('visible'),2600);}
@@ -69,6 +71,7 @@ function bindRoute(){
   }
 }
 function render(){
+  room?.cleanup();
   route=location.hash.slice(1).split('?')[0];if(!titles[route])route='overview';
   document.querySelector('#breadcrumb').textContent=titles[route];document.title=`${titles[route]} · SupeRR Pressure Lab`;
   document.querySelectorAll('[data-route]').forEach(a=>{a.classList.toggle('active',a.dataset.route===route);if(a.dataset.route===route)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
@@ -82,6 +85,7 @@ function mountReveals(){
 }
 function comparePlayer(key){const [role,id]=key.split(':');state.compareRole=role;state.compareA=id;state.compareB=selectPlayers(data.players,{role}).find(p=>p.id!==id).id;if(location.hash==='#compare')render();else location.hash='compare';}
 document.addEventListener('click',e=>{
+  if(e.target.closest('[data-photo-credits]')){returnFocus=document.activeElement;document.querySelector('#dialog-content').innerHTML=imageCredits();dialog.showModal();document.querySelector('#close-dialog').focus();return;}
   const p=e.target.closest('[data-player]');if(p){openPlayer(p.dataset.player);return;}
   const open=e.target.closest('[data-open-role]');if(open){state.role=open.dataset.openRole;state.scope='top';state.query='';state.page=1;if(location.hash==='#rankings')render();else location.hash='rankings';return;}
   const rb=e.target.closest('[data-role]');if(rb){const container=rb.closest('.segmented');if(container)setRole(container.id.split('-')[0],rb.dataset.role);return;}
@@ -92,6 +96,7 @@ document.addEventListener('click',e=>{
   if(e.target.closest('#close-dialog,#dialog-done'))dialog.close();
   const cp=e.target.closest('[data-compare-player]');if(cp){dialog.close();comparePlayer(cp.dataset.comparePlayer);}
 });
+document.addEventListener('error',e=>{if(e.target.matches?.('[data-player-photo]')){e.target.style.display='none';e.target.parentElement.classList.add('photo-failed');}},true);
 dialog.addEventListener('click',e=>{if(e.target===dialog){const rect=dialog.getBoundingClientRect();if(e.clientX<rect.left||e.clientX>rect.right||e.clientY<rect.top||e.clientY>rect.bottom)dialog.close();}});
 dialog.addEventListener('close',()=>{if(returnFocus?.isConnected)returnFocus.focus();});
 let dark=false;try{dark=localStorage.getItem('rr-theme')==='dark';}catch{}
@@ -100,7 +105,7 @@ applyTheme();document.querySelector('#theme-toggle').addEventListener('click',()
 const systemMotion=matchMedia('(prefers-reduced-motion: reduce)');let motionPaused=false;
 try{motionPaused=localStorage.getItem('rr-motion')==='paused';}catch{}
 const isMotionReduced=()=>motionPaused||systemMotion.matches;
-function applyMotion(){const reduced=isMotionReduced(),button=document.querySelector('#motion-toggle');document.body.classList.toggle('motion-paused',reduced);button.setAttribute('aria-pressed',String(reduced));button.setAttribute('aria-label',systemMotion.matches?'Reduced motion follows your device setting':reduced?'Play decorative animations':'Pause decorative animations');button.title=button.getAttribute('aria-label');button.textContent=reduced?'▷':'Ⅱ';button.disabled=systemMotion.matches;}
+function applyMotion(){const reduced=isMotionReduced(),button=document.querySelector('#motion-toggle');document.body.classList.toggle('motion-paused',reduced);button.setAttribute('aria-pressed',String(reduced));button.setAttribute('aria-label',systemMotion.matches?'Reduced motion follows your device setting':reduced?'Play decorative animations':'Pause decorative animations');button.title=button.getAttribute('aria-label');button.textContent=reduced?'▷':'Ⅱ';button.disabled=systemMotion.matches;document.dispatchEvent(new Event('rr-motion-change'));}
 applyMotion();document.querySelector('#motion-toggle').addEventListener('click',()=>{motionPaused=!motionPaused;applyMotion();try{localStorage.setItem('rr-motion',motionPaused?'paused':'playing');}catch{}toast(motionPaused?'Decorative animations paused':'Decorative animations enabled');});systemMotion.addEventListener('change',applyMotion);
 window.addEventListener('hashchange',()=>{if(data){render();window.scrollTo({top:0,behavior:'instant'});}});
 async function boot(){try{const response=await fetch('./assets/data.json');if(!response.ok)throw new Error('Data unavailable');data=await response.json();if(data.players.length!==249)throw new Error('Unexpected data schema');room=createSelectionRoom(data,{onInspect:openPlayer,onCompare:comparePlayer,notify:toast,shouldReduceMotion:isMotionReduced});render();}catch{main.innerHTML='<section class="card"><h1>The analysis could not load.</h1><p class="subtitle">Serve the dist folder over HTTP and check that assets/data.json is available.</p><button class="button button-pink margin-top" id="retry">Try again ↻</button></section>';document.querySelector('#retry').addEventListener('click',boot);}}

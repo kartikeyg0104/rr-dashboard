@@ -3,6 +3,9 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {pressureState,selectPlayers,reliabilityIndex,csvFor,esc,normaliseBoard,wrapSpotlight} from '../dist/lib.js';
 import {createSelectionRoom} from '../dist/auction.js';
+import {decorateStage,playerVault,cinemaToolbar} from '../dist/cinema.js';
+import {PLAYER_PHOTOS} from '../dist/photo-data.js';
+import {playerAvatar,portrait} from '../dist/photos.js';
 const data=JSON.parse(readFileSync(new URL('../dist/assets/data.json',import.meta.url)));
 test('the verified final twenty and support cohort remain fixed',()=>{
   assert.equal(data.players.length,249);
@@ -39,5 +42,28 @@ test('selection room renders audited evidence and labels its auction scope',()=>
   assert.match(html,/Sikandar Raza/);assert.match(html,/50\.62/);assert.match(html,/18 positive pressure appearances/);
   assert.match(html,/data-room-inspect="bat:2984"/);assert.match(html,/data-card-flip/);assert.match(html,/aria-hidden="true"/);
   assert.equal(JSON.stringify(data.players),before);
+});
+test('every final selection has a local photograph and source credit, including Kohli for comparisons',()=>{
+  const credits=JSON.parse(readFileSync(new URL('../dist/assets/image-credits.json',import.meta.url)));
+  assert.equal(Object.keys(PLAYER_PHOTOS).length,21);assert.equal(credits.images.length,21);
+  for(const p of data.players.filter(p=>p.rank<=10)){
+    const photo=PLAYER_PHOTOS[p.id];assert.ok(photo,p.name);assert.match(photo.src,/^\.\/assets\/players\/[a-z-]+\.(png|webp)$/);
+    const bytes=readFileSync(new URL('../dist/'+photo.src.slice(2),import.meta.url));assert.ok(bytes.length>4000,`${p.name} must not use a tiny placeholder`);
+    const alpha=photo.src.endsWith('.png')?[4,6].includes(bytes[25])||bytes.includes(Buffer.from('tRNS')):bytes.includes(Buffer.from('ALPH'))||(bytes.toString('ascii',12,16)==='VP8X'&&Boolean(bytes[20]&16));assert.ok(alpha,`${p.name}: transparent format expected`);
+    const credit=credits.images.find(c=>c.id===p.id);assert.equal(credit.src,photo.src);assert.ok(new URL(credit.profile).protocol==='https:');
+  }
+  assert.match(PLAYER_PHOTOS['6059'].src,/ruturaj-gaikwad/);assert.match(PLAYER_PHOTOS['47'].name,/Virat Kohli/);
+  assert.ok(!playerAvatar({id:'missing',shortName:'No Photo'}).includes('<img'));
+});
+test('cinematic player cards and vault use the correct portraits without changing rank data',()=>{
+  const markup=cinemaToolbar();for(const control of ['data-cinema-toggle','data-showreel-toggle','data-cinema-motion','data-replay-entrance'])assert.ok(markup.includes(control));
+  for(const role of ['bat','bowl']){
+    const vault=playerVault(data.players,role,0);assert.equal((vault.match(/class="rail-card /g)||[]).length,10);assert.equal((vault.match(/aria-pressed="true"/g)||[]).length,1);
+    for(const p of data.players.filter(p=>p.role===role&&p.rank<=10)){
+      const base=`<div class="auction-stage ${role}"><div class="stage-grid"></div><h2>${p.shortName}</h2><div class="jersey-art" aria-hidden="true"><svg></svg></div></div>`;
+      const rendered=decorateStage(base,p,{intro:true});assert.ok(rendered.includes(PLAYER_PHOTOS[p.id].src));assert.ok(rendered.includes('has-player-photo'));assert.ok(!rendered.includes('jersey-art'));assert.ok(rendered.includes('cinema-opening'));assert.ok(vault.includes(PLAYER_PHOTOS[p.id].src));
+    }
+  }
+  assert.equal(portrait({id:'unknown'}),'');
 });
 test('uncertainty values, names and evidence links are finite and complete',()=>{for(const p of data.players){for(const key of ['score','wins','n','lift','utility','betaLow','betaHigh','rankLow','rankHigh','top10Frequency'])assert.ok(Number.isFinite(p[key]),`${p.name}: ${key}`);assert.ok(p.wins<=p.n);assert.ok(p.betaLow<=p.betaHigh);assert.equal(p.scenarios.length,4);}assert.equal(data.missingFixtures.length,2);assert.ok(data.missingFixtures.every(f=>new URL(f.url).hostname==='www.icc-cricket.com'));});
