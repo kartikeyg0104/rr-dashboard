@@ -13,7 +13,7 @@
 .has-player-photo .collectible-name>strong{text-shadow:0 2px 8px #39051f40;font-size:27px}
 .has-player-photo .collectible-name>span{font-size:5px;letter-spacing:1.6px;color:#fff}
 .has-player-photo .collectible-footer{margin-top:10px;padding-top:10px}
-.has-player-photo .tilt-card{width:255px;height:375px}
+.has-player-photo .spotlight-card{width:255px;height:375px}
 .has-player-photo .card-stage{padding-bottom:67px}
 .has-player-photo .card-halo{width:320px;height:320px;top:10px}
 .has-player-photo .card-back-note{font-size:7px;line-height:1.9}
@@ -25,7 +25,7 @@
 .portrait-art.photo-failed .photo-fallback-label{opacity:1}
 .portrait-art.photo-failed img{display:none}
 .rail-portrait{position:absolute;width:132px;height:130px;object-fit:contain;object-position:bottom center;right:5px;top:20px;z-index:0;mask-image:linear-gradient(#000 66%,transparent 100%);transition:transform .45s cubic-bezier(.15,.8,.3,1);filter:drop-shadow(0 3px 5px #45203d15)}
-.rail-card:hover .rail-portrait{transform:scale(1.06) translateY(-3px)}
+.rail-card:hover .rail-portrait{transform:none}
 .rail-card:has(.rail-portrait) .rail-rank{z-index:2}
 .rail-card:has(.rail-portrait) .rail-player{z-index:2;position:relative;text-shadow:0 1px 4px #fff8;margin-top:auto}
 .rail-card:has(.rail-portrait) .rail-bottom{position:relative;z-index:2}
@@ -41,7 +41,7 @@
 .photo-credits-link:hover{color:var(--pink)}
 .photo-credit-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:20px}
 .photo-credit-item{display:flex;align-items:center;gap:11px;min-width:0;padding:12px;border:1px solid var(--border);border-radius:11px;background:var(--soft);transition:border-color .25s,transform .25s}
-.photo-credit-item:hover{border-color:#d56ba5;transform:translateY(-2px)}
+.photo-credit-item:hover{border-color:#d56ba5;transform:none}
 .credit-portrait{width:43px;height:55px;object-fit:contain;object-position:center bottom;flex-shrink:0}
 .photo-credit-item strong{font-size:10px;line-height:1.5;display:block}
 .photo-credit-item small{font-size:7px;color:var(--muted);display:block;margin-top:3px}
@@ -51,7 +51,14 @@
 .bowl .dialog-portrait{background:var(--blue-soft)}
 .dialog-top:has(.dialog-portrait)>div{flex:1}
 .dialog-top:has(.dialog-portrait)>.icon-button{align-self:flex-start;flex-shrink:0}
-@media(min-width:1500px){.has-player-photo .tilt-card{width:280px;height:404px}.portrait-art{height:230px}.has-player-photo .collectible-name>strong{font-size:29px}.has-player-photo .collectible-name>span{font-size:5.5px}.has-player-photo .collectible.back h3{font-size:33px}.has-player-photo .collectible.back dl>div{padding:10px 0}.has-player-photo .card-halo{width:345px;height:345px}}
-@media(max-width:1180px){.has-player-photo .tilt-card{width:235px;height:354px}.portrait-art{height:195px}.has-player-photo .collectible-name>strong{font-size:25px}.has-player-photo .collectible-name>span{font-size:4.5px;letter-spacing:1.3px}.has-player-photo .card-halo{width:285px;height:285px}.has-player-photo .collectible.back h3{font-size:27px}.has-player-photo .collectible.back dl>div{padding:8px 0}.has-player-photo .card-back-note{font-size:6px}}
-@media(max-width:900px){.has-player-photo .tilt-card{width:222px;height:342px}.portrait-art{height:182px}.has-player-photo .collectible-name>strong{font-size:24px}.has-player-photo .collectible-footer b{font-size:25px}.has-player-photo .collectible-footer small{font-size:4px;letter-spacing:.6px}.has-player-photo .collectible.back dt{font-size:6px}.has-player-photo .collectible.back dd{font-size:10px}.has-player-photo .collectible.back h3{font-size:25px}.has-player-photo .card-halo{width:272px;height:272px}.rail-portrait{width:123px;height:123px}}
-@media(max-width:680px){.has-player-photo .tilt-card{width:235px;height:353px}.portrait-art{height:196px}.has-player-photo .card-halo{width:285px;height:285px}.has-player-photo .collectible-name>strong{font-size:26px}.has-player-photo .collectible-name>span{font-size:4.5px;letter-spacing:1.3px}.has-player-photo .collectible-footer b{font-size:26px}.has-player-photo .collectible-footer small{font-size:4.5px;letter-spacing:.7px}.has-player-photo .collectible.back h3{font-size:27px}.has-player-photo .collectible.back dt{font-size:6px}.has-player-photo .collectible.back dl>div{padding:8px 0}.has-player-photo .card-back-note{font-size:6px}.photo-credit-grid{gap:8px}.photo-credit-item{padding:9px;gap:7px}.photo-credit-item strong{font-size:9px}.photo-credit-item small{font-size:6px}.credit-portrait{width:32px;height:45px}.dialog-portrait{width:58px;height:75px;border-radius:10px}.dialog-top:has(.dialog-portrait){gap:11px}.dialog-top:has(.dialog-portrait) h2{font-size:21px}}
+/* Pointer motion belongs only to the main card, never the surrounding UI. */
+.cinema-stage .spotlight-card{cursor:pointer;user-select:none;touch-action:manipulation;transform:translate3d(var(--card-x,0px),var(--card-y,0px),0) rotateX(var(--card-rx,0deg)) rotateY(var(--card-ry,0deg)) scale(var(--card-scale,1));transition:transform .3s cubic-bezier(.2,.75,.2,1),filter .3s}
+.cinema-stage .spotlight-card.is-hovered{transition-duration:.14s;filter:drop-shadow(0 14px 20px #0003)}
+.cinema-stage .spotlight-card:focus-visible{outline:3px solid var(--stage-accent);outline-offset:9px;border-radius:17px}
+.cinema-stage .spotlight-card img{-webkit-user-drag:none;pointer-events:none}
+body.motion-paused .cinema-stage .spotlight-card{transform:none!important;filter:none}
+@media(prefers-reduced-motion:reduce){.cinema-stage .spotlight-card{transform:none!important;filter:none}}
+@media(min-width:1500px){.has-player-photo .spotlight-card{width:280px;height:404px}.portrait-art{height:230px}.has-player-photo .collectible-name>strong{font-size:29px}.has-player-photo .collectible-name>span{font-size:5.5px}.has-player-photo .collectible.back h3{font-size:33px}.has-player-photo .collectible.back dl>div{padding:10px 0}.has-player-photo .card-halo{width:345px;height:345px}}
+@media(max-width:1180px){.has-player-photo .spotlight-card{width:235px;height:354px}.portrait-art{height:195px}.has-player-photo .collectible-name>strong{font-size:25px}.has-player-photo .collectible-name>span{font-size:4.5px;letter-spacing:1.3px}.has-player-photo .card-halo{width:285px;height:285px}.has-player-photo .collectible.back h3{font-size:27px}.has-player-photo .collectible.back dl>div{padding:8px 0}.has-player-photo .card-back-note{font-size:6px}}
+@media(max-width:900px){.has-player-photo .spotlight-card{width:222px;height:342px}.portrait-art{height:182px}.has-player-photo .collectible-name>strong{font-size:24px}.has-player-photo .collectible-footer b{font-size:25px}.has-player-photo .collectible-footer small{font-size:4px;letter-spacing:.6px}.has-player-photo .collectible.back dt{font-size:6px}.has-player-photo .collectible.back dd{font-size:10px}.has-player-photo .collectible.back h3{font-size:25px}.has-player-photo .card-halo{width:272px;height:272px}.rail-portrait{width:123px;height:123px}}
+@media(max-width:680px){.has-player-photo .spotlight-card{width:235px;height:353px}.portrait-art{height:196px}.has-player-photo .card-halo{width:285px;height:285px}.has-player-photo .collectible-name>strong{font-size:26px}.has-player-photo .collectible-name>span{font-size:4.5px;letter-spacing:1.3px}.has-player-photo .collectible-footer b{font-size:26px}.has-player-photo .collectible-footer small{font-size:4.5px;letter-spacing:.7px}.has-player-photo .collectible.back h3{font-size:27px}.has-player-photo .collectible.back dt{font-size:6px}.has-player-photo .collectible.back dl>div{padding:8px 0}.has-player-photo .card-back-note{font-size:6px}.photo-credit-grid{gap:8px}.photo-credit-item{padding:9px;gap:7px}.photo-credit-item strong{font-size:9px}.photo-credit-item small{font-size:6px}.credit-portrait{width:32px;height:45px}.dialog-portrait{width:58px;height:75px;border-radius:10px}.dialog-top:has(.dialog-portrait){gap:11px}.dialog-top:has(.dialog-portrait) h2{font-size:21px}}

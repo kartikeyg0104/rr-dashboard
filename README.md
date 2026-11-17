@@ -27,7 +27,7 @@ The tests reproduce the beta lower-tail index for every supported record, lock t
 
 - RR inspired pink, navy, royal blue and gold design; self-hosted Manrope font.
 - Responsive layouts, animated charts and transitions, light/dark themes, reduced-motion support.
-- Auction-inspired selection room with holographic player cards, 3D pointer tilt, evidence on the reverse, stadium beams and an animated ranking ticker.
+- Auction-inspired selection room with holographic player cards, evidence on the reverse, stadium beams and an animated ranking ticker.
 - A browser-local review board with add/remove, clear, player evidence and comparison actions. This never changes official selections or represents auction availability.
 - A persistent animation pause control, with automatic respect for the device's reduced-motion setting.
 - Immersive Cinema view, split-door entrance, stadium backdrop, broadcast name reveals, lens flares and a lit auction podium.
@@ -83,3 +83,5 @@ scripts/verify.mjs         Static output checks
 Local source export utilities, source verification notes, QA output and optional private Sites metadata are ignored by Git and are not required to host the app. Manrope and Bebas Neue are distributed under the SIL Open Font License; their licenses are included in dist/assets/.
 
 Player photographs remain copyright their respective owners. Credits and original source URLs are recorded in dist/assets/image-credits.json; uniforms in source photos do not imply current team membership, auction availability or Rajasthan Royals affiliation. No synthetic player likenesses are used.
+
+The main spotlight card alone tilts gently and follows the pointer on desktop. Click/tap the card, use its flip button, or focus it and press Enter/Space to switch between the portrait and evidence. Hovering never flips it. All surrounding cards and controls remain level and stationary. Reduced-motion and Effects off disable pointer tilt while keeping manual evidence access available.
